@@ -13,9 +13,9 @@ function App() {
       <h1 className="heading" title="react" >
         Hi!
       </h1>
-      <Ciao fname="Alex" sname="Qwerty" />
-      <Ciao fname="Masha" sname="Bob" isHi/>
-      <Ciao fname={user.firstName} sname={user.lastName} isHi/>
+      <Ciao fname="Alex" sname="Qwerty" className='ciao'/>
+      <Ciao fname="Masha" sname="Bob" />
+      <Ciao fname={user.firstName} sname={user.lastName} />
     </>
   );
 }
