@@ -11,11 +11,14 @@ class Ciao extends Component {
     this.setState({isHi: !this.state.isHi})
   }
   render() {
-    const { fname, sname, className } = this.props;
+    const { id, fname, sname} = this.props;
     const { isHi } = this.state;
+    if(isHi===false){
+      return <h3>Bye, {fname} {sname}! (id:{id})</h3>
+    }
     return (
       <>
-        <h2 className={className}>{isHi ? "Hello" : "Bye"}, {fname} {sname}!</h2>
+        <h2>Hi, {fname} {sname}! (id:{id})</h2>
         <button onClick={this.handlerSwitch}>switch isHi</button>
       </>
     );
