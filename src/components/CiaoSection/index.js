@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CiaoHeading from "../CiaoHeading";
 import CiaoList from '../CiaoList/index';
 
 class CiaoSection extends Component {
@@ -69,9 +70,7 @@ class CiaoSection extends Component {
     const { users, isUpSortById, isUpSortByLname } = this.state;
     return (
       <>
-        <h1 className="heading" title="react">
-          Hi!
-        </h1>
+        <CiaoHeading content='Users Dashbord' title='react' className='heading'/>
         <button onClick={this.sortById}>
           sort by ID {isUpSortById ? "DN" : "UP"}
         </button>
