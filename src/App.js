@@ -33,22 +33,30 @@ class App extends Component {
           lname: "Bredsk",
         },
       ],
+      isUpSortById:true
     };
   }
   sortById=()=>{
-    //взять массив
-    //отсортировать
-    //изменить состояние
+    const { users, isUpSortById } = this.state;
+    //const copyUsers = [...users];
+    const copyUsers = JSON.parse(JSON.stringify(users));
+    copyUsers.sort((a, b) =>{
+      return isUpSortById ? a.id - b.id : b.id - a.id ;
+    })
+    this.setState({
+      users:copyUsers,
+      isUpSortById: !isUpSortById
+    })
   }
   render() {
-    const { users } = this.state;
+    const { users, isUpSortById } = this.state;
     return (
       <>
         <h1 className="heading" title="react">Hi!</h1>
-        <button onClick={this.sortById}>sort by ID</button>
+        <button onClick={this.sortById}>sort by ID {isUpSortById?'DN':'UP'}</button>
         <ol>
-          {users.map((user,i) => 
-            <li key={i}>
+          {users.map((user) => 
+            <li key={user.id}>
               <Ciao  fname={user.fname} sname={user.lname} id={user.id} />
             </li>
           )}
