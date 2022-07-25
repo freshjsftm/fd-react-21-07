@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import UsersList from "./components/UsersList";
+import UsersDashbord from './UsersDashbord';
 
 const App = () => {
   return (
     <>
-      <UsersList/>
+      <UsersDashbord />
     </>
   );
 };
