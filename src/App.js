@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import CiaoSection from "./components/CiaoSection";
+import UsersList from "./components/UsersList";
 
 const App = () => {
   return (
     <>
-      <CiaoSection />
+      <UsersList/>
     </>
   );
 };
