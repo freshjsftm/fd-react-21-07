@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import CiaoHeading from "../CiaoHeading";
 import CiaoList from '../CiaoList/index';
-import CiaoSortedList from '../CiaoSortedList';
+// import CiaoSortedList from '../CiaoSortedList';
+import CiaoSortedBtn from '../CiaoSortedBtn';
 
 class CiaoSection extends Component {
   constructor(props) {
@@ -72,7 +73,9 @@ class CiaoSection extends Component {
     return (
       <>
         <CiaoHeading content='Users Dashbord' title='react' className='heading'/>
-        <CiaoSortedList isUpSortById={isUpSortById} isUpSortByLname={isUpSortByLname} sortById={this.sortById} sortByLname={this.sortByLname}/>
+        {/* <CiaoSortedList isUpSortById={isUpSortById} isUpSortByLname={isUpSortByLname} sortById={this.sortById} sortByLname={this.sortByLname}/> */}
+        <CiaoSortedBtn isUpSort={isUpSortById} sortBy={this.sortById} context='ID'/>
+        <CiaoSortedBtn isUpSort={isUpSortByLname} sortBy={this.sortByLname} context='Last Name'/>
         <CiaoList users={users}/>
       </>
     );
