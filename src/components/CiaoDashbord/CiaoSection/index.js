@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CiaoHeading from "../CiaoHeading";
 import CiaoList from '../CiaoList/index';
+import CiaoSortedList from '../CiaoSortedList';
 
 class CiaoSection extends Component {
   constructor(props) {
@@ -71,12 +72,7 @@ class CiaoSection extends Component {
     return (
       <>
         <CiaoHeading content='Users Dashbord' title='react' className='heading'/>
-        <button onClick={this.sortById}>
-          sort by ID {isUpSortById ? "DN" : "UP"}
-        </button>
-        <button onClick={this.sortByLname}>
-          sort by last name {isUpSortByLname ? "DN" : "UP"}
-        </button>
+        <CiaoSortedList isUpSortById={isUpSortById} isUpSortByLname={isUpSortByLname} sortById={this.sortById} sortByLname={this.sortByLname}/>
         <CiaoList users={users}/>
       </>
     );
