@@ -1,5 +1,5 @@
 import React from "react";
-import UserCard from "../UserCard/index";
+import UserCard from "../UserCard";
 const UsersList = (props) => {
   const { users, setUserSelected } = props;
   const setIsSelected = (id)=>{
