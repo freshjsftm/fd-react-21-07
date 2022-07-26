@@ -8,7 +8,7 @@ const UserCard = (props) => {
   const styles = { backgroundColor: isSelected ? "teal" : "pink" };
   const handlerBtn = () => setIsSelected(id)
   return (
-    <article style={styles}>
+    <article style={styles} className='container'>
       <h3>
         id={id}) {fname} {lname}
       </h3>

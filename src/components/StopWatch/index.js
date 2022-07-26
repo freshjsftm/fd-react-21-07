@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./StopWatch.module.css";
 
 class StopWatch extends Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class StopWatch extends Component {
     // const { time } = this.state;
     // const newTime = new Date(time.getTime()+1000)
     // this.setState({ time: newTime });
-    this.setState((state)=>{
+    this.setState((state) => {
       const { time } = state;
-      const newTime = new Date(time.getTime()+1000);
-      return {time: newTime}
-    })
+      const newTime = new Date(time.getTime() + 1000);
+      return { time: newTime };
+    });
   };
   start = () => {
     // this.stop();
@@ -36,9 +37,9 @@ class StopWatch extends Component {
     //this.start()
     console.log("componentDidMount");
   }
-  // componentDidUpdate(){
-  //   console.log('componentDidUpdate')
-  // }
+  componentDidUpdate(){
+    console.log('componentDidUpdate')
+  }
   componentWillUnmount() {
     console.log("componentWillUnmount");
     this.reset();
@@ -48,11 +49,13 @@ class StopWatch extends Component {
     const { time } = this.state;
     console.log("render");
     return (
-      <article>
+      <article className={styles.container}>
         <h2>{time.toLocaleTimeString("en-GB")}</h2>
-        <button onClick={this.start}>start</button>
-        <button onClick={this.stop}>stop</button>
-        <button onClick={this.reset}>reset</button>
+        <div>
+          <button onClick={this.start}>start</button>
+          <button onClick={this.stop}>stop</button>
+          <button onClick={this.reset}>reset</button>
+        </div>
       </article>
     );
   }
