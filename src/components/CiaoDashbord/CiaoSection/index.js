@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CiaoHeading from "../CiaoHeading";
-import CiaoList from '../CiaoList/index';
+import CiaoList from '../CiaoList';
 // import CiaoSortedList from '../CiaoSortedList';
 import CiaoSortedBtn from '../CiaoSortedBtn';
 

@@ -1,14 +1,11 @@
 import React from "react";
 import "./App.css";
-import UsersDashbord from './components/UsersDashbord';
-import CiaoSection from './components/CiaoDashbord/CiaoSection';
-
+import StopWatch from "./components/StopWatch";
 
 const App = () => {
   return (
     <>
-      <UsersDashbord />
-      <CiaoSection />
+      <StopWatch />
     </>
   );
 };
