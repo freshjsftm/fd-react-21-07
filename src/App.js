@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
-import StopWatch from "./components/StopWatch";
-import UsersDashbord from "./components/UsersDashbord";
+import SignInForm from "./components/forms/SignInForm";
+
 
 
 const App = () => {
   return (
     <>
-      <StopWatch />
-      <UsersDashbord />
+    <SignInForm />
     </>
   );
 };
