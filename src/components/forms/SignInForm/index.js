@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import styles from "./SignInForm.module.css";
 
-const initialValues = { email: "", password: "" };
+const initialValues = {
+  email: "",
+  password: "",
+  isemailValid: false,
+  ispasswordValid:false
+};
 
 class SignInForm extends Component {
   constructor(props) {
@@ -15,18 +20,20 @@ class SignInForm extends Component {
   };
 
   handlerInput = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, [`is${name}Valid`]: !value.includes(' ') });
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, isemailValid , ispasswordValid} = this.state;
+    const emailClassName = `${styles.input} ${isemailValid? styles.valid: styles.invalid}`;
+    const passwordClassName = `${styles.input} ${ispasswordValid? styles.valid: styles.invalid}`;
     return (
       <form className={styles.form} onSubmit={this.handlerForm}>
         <input
           name="email"
           onChange={this.handlerInput}
           value={email}
-          className={styles.input}
+          className={emailClassName}
           placeholder="email"
           type="email"
         />
@@ -34,7 +41,7 @@ class SignInForm extends Component {
           name="password"
           onChange={this.handlerInput}
           value={password}
-          className={styles.input}
+          className={passwordClassName}
           placeholder="password"
           type="password"
         />
