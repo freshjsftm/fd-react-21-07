@@ -8,6 +8,8 @@ const App = () => {
   return (
     <>
     <SignInForm />
+    <hr/>
+    <SignInForm />
     </>
   );
 };
