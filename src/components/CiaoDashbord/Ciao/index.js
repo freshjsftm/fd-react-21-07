@@ -1,6 +1,14 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 class Ciao extends Component {
+  /**
+   * 
+   * @param {*} props 
+   * @param {number} props.id 
+   * @param {string} props.fname 
+   * @param {string} props.sname 
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +18,7 @@ class Ciao extends Component {
   handlerSwitch = ()=>{
     this.setState({isHi: !this.state.isHi})
   }
+  
   render() {
     const { id, fname, sname} = this.props;
     const { isHi } = this.state;
@@ -23,5 +32,21 @@ class Ciao extends Component {
       </>
     );
   }
+
 }
+
+Ciao.defaultProps = {
+  id:0,
+  fname:'Noname',
+  sname:'Noname',
+}
+
+Ciao.propTypes = {
+  id:PropTypes.number.isRequired,
+  fname:PropTypes.string.isRequired,
+  sname:PropTypes.string.isRequired,
+};
+
+
+
 export default Ciao;

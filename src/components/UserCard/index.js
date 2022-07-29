@@ -1,4 +1,5 @@
 import React from "react";
+import { PropTypes } from 'prop-types';
 
 const UserCard = (props) => {
   const {
@@ -16,5 +17,17 @@ const UserCard = (props) => {
     </article>
   );
 };
+
+export const userPropTypes = PropTypes.shape({
+  id:PropTypes.number.isRequired,
+  fname:PropTypes.string.isRequired,
+  lname: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool
+}).isRequired;
+
+UserCard.propTypes = {
+  user:userPropTypes,
+  setIsSelected:PropTypes.func.isRequired
+}
 
 export default UserCard;
