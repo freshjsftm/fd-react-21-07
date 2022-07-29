@@ -47,6 +47,4 @@ Ciao.propTypes = {
   sname:PropTypes.string.isRequired,
 };
 
-
-
 export default Ciao;
