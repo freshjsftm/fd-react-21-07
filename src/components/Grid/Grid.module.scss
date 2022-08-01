@@ -1,0 +1,24 @@
+@use '../../common/style/breakpoints' as *;
+
+.container{
+  width: 90%;
+  margin: auto;
+  @media screen and (min-width: $sm){
+    max-width: $sm - 10px;
+    background-color: aqua;
+  }
+  @media screen and (min-width: $md){
+    max-width: $sm - 10px;
+    background-color: salmon;
+  }
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+.col-6{
+  width: 45%;
+}
+.col-3{
+  width: 22%;
+}
