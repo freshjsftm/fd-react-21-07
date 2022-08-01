@@ -1,10 +1,12 @@
 import React from "react";
-import Calendar from "./components/Calendar";
+import StopWatch from './components/StopWatch';
+import UsersDashbord from "./components/UsersDashbord";
 
 const App = () => { 
   return (
     <>
-      <Calendar />
+      <StopWatch />
+      <UsersDashbord />
     </>
   );
 };

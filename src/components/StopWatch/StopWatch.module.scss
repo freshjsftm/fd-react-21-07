@@ -1,0 +1,23 @@
+//@import '../../common/style/colors';
+@use '../../common/style/colors';
+@use '../../common/style/template';
+
+.container{
+  min-width: 200px;
+  width: 50%;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: colors.$bg-color;
+  .heading{
+    max-width: 90%;
+    @extend %one-line;
+    font: {
+      size: 3em;
+    }
+    color: colors.$text-color;
+  }
+}

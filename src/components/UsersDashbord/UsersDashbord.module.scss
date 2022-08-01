@@ -1,0 +1,14 @@
+@use '../../common/style/colors' as *;
+@import '../../common/style/breakpoints';
+
+.container{
+  background-color: $bg-color;
+  width: 90%;
+  margin: auto;
+  @media screen and (min-width: $md){
+    width: 70%;
+  }
+};
+
+
+

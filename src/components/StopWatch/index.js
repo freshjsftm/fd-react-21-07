@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./StopWatch.module.css";
+import styles from "./StopWatch.module.scss";
 
 class StopWatch extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class StopWatch extends Component {
     console.log("render");
     return (
       <article className={styles.container}>
-        <h2>{time.toLocaleTimeString("en-GB")}</h2>
+        <h2 className={styles.heading}>{time.toLocaleTimeString("en-GB")}hfghfghgfhfghfghfghfghfgh</h2>
         <div>
           <button onClick={this.start}>start</button>
           <button onClick={this.stop}>stop</button>

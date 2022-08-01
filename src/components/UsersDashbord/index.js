@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SelectUsersList from '../SelectUsersList';
 import UsersList from '../UsersList';
-import styles from './UsersDashbord.module.css';
+import styles from './UsersDashbord.module.scss';
 const usersDB = [
   {
     id: 4,
