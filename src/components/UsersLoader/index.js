@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getRandomUsers } from "../../api";
+import Error from "../Error";
 import Spinner from "../Spinner";
 import styles from "./UsersLoader.module.scss";
 
@@ -18,7 +19,12 @@ class UsersLoader extends Component {
     const { currentPage } = this.state;
     this.setState({ isFetching: true });
     getRandomUsers({ page: currentPage })
-      .then((data) => this.setState({ users: data.results }))
+      .then((data) => {
+        if(data.error){
+          throw new Error();
+        }
+        this.setState({ users: data.results });
+      })
       .catch((error) => this.setState({ isError: true }))
       .finally(() => this.setState({ isFetching: false }));
   };
@@ -64,7 +70,7 @@ class UsersLoader extends Component {
         {isFetching ? (
           <Spinner />
         ) : isError ? (
-          <div>Error!!!</div>
+          <Error />
         ) : (
           <ol>{users.map(this.showUser)}</ol>
         )}
