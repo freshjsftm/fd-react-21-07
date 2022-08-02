@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getRandomUsers } from "../../api";
 import styles from "./UsersLoader.module.scss";
 
 class UsersLoader extends Component {
@@ -15,10 +16,7 @@ class UsersLoader extends Component {
   load = () => {
     const { currentPage } = this.state;
     this.setState({ isFetching: true });
-    fetch(
-      `https://randomuser.me/api/?page=${currentPage}&results=3&seed=fd20221&nat=gb`
-    )
-      .then((response) => response.json())
+    getRandomUsers({page:currentPage})    
       .then((data) => this.setState({ users: data.results }))
       .catch((error) => this.setState({ isError: true }))
       .finally(() => this.setState({ isFetching: false }));
