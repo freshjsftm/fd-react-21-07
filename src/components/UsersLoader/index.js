@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from './UsersLoader.module.scss';
+import styles from "./UsersLoader.module.scss";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -8,37 +8,62 @@ class UsersLoader extends Component {
       users: [],
       isError: false,
       isFetching: false,
-      count:0
+      currentPage: 1,
     };
   }
 
-  componentDidMount() {
+  load = () => {
+    const { currentPage } = this.state;
     this.setState({ isFetching: true });
-    fetch("https://randomuser.me/api/?page=1&results=3&seed=fd20221&nat=gb")
+    fetch(
+      `https://randomuser.me/api/?page=${currentPage}&results=3&seed=fd20221&nat=gb`
+    )
       .then((response) => response.json())
       .then((data) => this.setState({ users: data.results }))
       .catch((error) => this.setState({ isError: true }))
-      .finally(() => this.setState({ isFetching: false }))
+      .finally(() => this.setState({ isFetching: false }));
+  };
+
+  componentDidMount() {
+    this.load();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { currentPage } = this.state;
+    if (currentPage !== prevState.currentPage) {
+      this.load();
+    }
   }
 
   showUser = ({ email, login: { uuid }, name: { first, last }, nat }) => (
     <li key={uuid} className={styles.user_container}>
-      <h3>{first} {last} ({nat})</h3>
+      <h3>
+        {first} {last} ({nat})
+      </h3>
       <p>{email} </p>
     </li>
   );
+  prevPage = () => {
+    if (this.state.currentPage <= 1) {
+      return;
+    }
+    this.setState((state) => ({ currentPage: state.currentPage - 1 }));
+  };
+  nextPage = () => {
+    this.setState((state) => ({ currentPage: state.currentPage + 1 }));
+  };
   render() {
-    const { users, isError, isFetching } = this.state;
-    if (isError) {
-      return <div>Error!!!</div>;
-    }
-    if (isFetching) {
-      return <div>Loading...</div>;
-    }
+    const { users, isError, isFetching, currentPage } = this.state;
     return (
-      <section>
-        <h2 className={styles.users_heading}>Users List</h2>
-        <ol>{users.map(this.showUser)}</ol>
+      <section className={styles.users_container}>
+        <h2>Users List</h2>
+        <div>
+          <button onClick={this.prevPage}>&lt;</button>
+          <span> {currentPage} </span>
+          <button onClick={this.nextPage}>&gt;</button>
+        </div>
+        {isFetching && <div>Loading...</div>}
+        {isError ? <div>Error!!!</div> : <ol>{users.map(this.showUser)}</ol>}
       </section>
     );
   }
