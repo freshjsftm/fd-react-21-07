@@ -1,5 +1,8 @@
 .users_container{
   text-align: center;
+  &>ol{
+    list-style: none;
+  }
 }
 .user_container{
   width: 90%;
