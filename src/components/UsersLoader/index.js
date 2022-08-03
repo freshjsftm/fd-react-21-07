@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { getRandomUsers } from "../../api";
 import config from "../../configs";
-import Error from "../Error";
-import Spinner from "../Spinner";
+import ListLoader from "./ListLoader";
 import styles from "./UsersLoader.module.scss";
 
 class UsersLoader extends Component {
@@ -14,13 +13,18 @@ class UsersLoader extends Component {
       isFetching: false,
       currentPage: 1,
       currentAmount: config.DEFAULT_AMOUNT,
+      currentNat: config.DEFAULT_NAT,
     };
   }
 
   load = () => {
-    const { currentPage, currentAmount } = this.state;
+    const { currentPage, currentAmount, currentNat } = this.state;
     this.setState({ isFetching: true });
-    getRandomUsers({ page: currentPage, results: currentAmount })
+    getRandomUsers({
+      page: currentPage,
+      results: currentAmount,
+      nat: currentNat,
+    })
       .then((data) => {
         if (data.error) {
           throw new Error();
@@ -36,27 +40,16 @@ class UsersLoader extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage, currentAmount } = this.state;
-    if (currentPage !== prevState.currentPage ||currentAmount!==prevState.currentAmount ) {
+    const { currentPage, currentAmount, currentNat } = this.state;
+    const isUpdate = currentPage !== prevState.currentPage ||
+      currentAmount !== prevState.currentAmount ||
+      currentNat !== prevState.currentNat;
+    if (isUpdate) {
       this.load();
     }
   }
 
-  showUser = ({
-    email,
-    login: { uuid },
-    name: { first, last },
-    nat,
-    gender,
-  }) => (
-    <li key={uuid} className={styles.user_container}>
-      <h3>
-        {first} {last} ({nat})
-      </h3>
-      <p>{gender}</p>
-      <p>{email} </p>
-    </li>
-  );
+
   prevPage = () => {
     if (this.state.currentPage <= 1) {
       return;
@@ -69,54 +62,38 @@ class UsersLoader extends Component {
   handlerAmount = ({ target: { value } }) => {
     this.setState({ currentAmount: Number(value) });
   };
+  showRadio = (n) => {
+    const { currentAmount } = this.state;
+    return (
+      <label key={n}>
+        <input
+          onChange={this.handlerAmount}
+          type="radio"
+          name="amount"
+          value={n}
+          checked={currentAmount === n}
+        />{" "}
+        {n}{" "}
+      </label>
+    );
+  };
+  showOption = (nat) => (<option key={nat} value={nat}>{nat}</option>)
+  handlerNat = ({ target: { value } }) => {this.setState({currentNat: value})}
   render() {
-    const { users, isError, isFetching, currentPage, currentAmount } =
-      this.state;
+    const { users, isError, isFetching, currentPage, currentNat } = this.state;
     return (
       <section className={styles.users_container}>
         <h2>Users List</h2>
         <div>
+          <select onChange={this.handlerNat} value={currentNat}>
+            {config.DEFAULT_NATS.map(this.showOption)}
+          </select>
           <button onClick={this.prevPage}>&lt;</button>
           <span> {currentPage} </span>
           <button onClick={this.nextPage}>&gt;</button>
-          <label>
-            <input
-              onChange={this.handlerAmount}
-              type="radio"
-              name="amount"
-              value={5}
-              checked={currentAmount === 5}
-            />
-            5
-          </label>
-          <label>
-            <input
-              onChange={this.handlerAmount}
-              type="radio"
-              name="amount"
-              value={10}
-              checked={currentAmount === 10}
-            />
-            10
-          </label>
-          <label>
-            <input
-              onChange={this.handlerAmount}
-              type="radio"
-              name="amount"
-              value={15}
-              checked={currentAmount === 15}
-            />
-            15
-          </label>
+          {config.DEFAULT_AMOUNTS.map(this.showRadio)}
         </div>
-        {isFetching ? (
-          <Spinner />
-        ) : isError ? (
-          <Error />
-        ) : (
-          <ol>{users.map(this.showUser)}</ol>
-        )}
+        <ListLoader users={users} isError={isError} isFetching={isFetching}/>
       </section>
     );
   }

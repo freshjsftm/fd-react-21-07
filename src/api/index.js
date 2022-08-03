@@ -17,7 +17,7 @@ export const getRandomUsers = (options = {}) => {
     page: 1,
     results: config.DEFAULT_AMOUNT,
     seed: config.API_KEY,
-    nat: "gb",    
+    nat: config.DEFAULT_NAT,    
     inc:config.DEFAULT_USER_PROP,
   };
   const finallyOptions = { ...defaultOption, ...options };
