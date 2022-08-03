@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getRandomUsers } from "../../api";
 import config from "../../configs";
+import ControlPanel from "./ControlPanel";
 import ListLoader from "./ListLoader";
 import styles from "./UsersLoader.module.scss";
 
@@ -49,7 +50,6 @@ class UsersLoader extends Component {
     }
   }
 
-
   prevPage = () => {
     if (this.state.currentPage <= 1) {
       return;
@@ -77,22 +77,15 @@ class UsersLoader extends Component {
       </label>
     );
   };
-  showOption = (nat) => (<option key={nat} value={nat}>{nat}</option>)
-  handlerNat = ({ target: { value } }) => {this.setState({currentNat: value})}
+
+  setNat = (newNat) => {this.setState({currentNat: newNat})}
   render() {
-    const { users, isError, isFetching, currentPage, currentNat } = this.state;
+    const { users, isError, isFetching, currentNat, currentPage} = this.state;
     return (
       <section className={styles.users_container}>
         <h2>Users List</h2>
-        <div>
-          <select onChange={this.handlerNat} value={currentNat}>
-            {config.DEFAULT_NATS.map(this.showOption)}
-          </select>
-          <button onClick={this.prevPage}>&lt;</button>
-          <span> {currentPage} </span>
-          <button onClick={this.nextPage}>&gt;</button>
-          {config.DEFAULT_AMOUNTS.map(this.showRadio)}
-        </div>
+        {config.DEFAULT_AMOUNTS.map(this.showRadio)}
+        <ControlPanel controlPage={{currentPage, prevPage:this.prevPage, nextPage: this.nextPage}} controlNat={{currentNat, setNat:this.setNat}}/>
         <ListLoader users={users} isError={isError} isFetching={isFetching}/>
       </section>
     );
