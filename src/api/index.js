@@ -13,11 +13,11 @@ import config from "../configs";
  */
 export const getRandomUsers = (options = {}) => {
   const defaultOption = {
+    gender: "male",
     page: 1,
     results: config.DEFAULT_AMOUNT,
     seed: config.API_KEY,
-    nat: "gb",
-    gender: "male",
+    nat: "gb",    
     inc:config.DEFAULT_USER_PROP,
   };
   const finallyOptions = { ...defaultOption, ...options };
