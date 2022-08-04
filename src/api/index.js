@@ -1,5 +1,13 @@
 import queryString from "query-string";
 import config from "../configs";
+const defaultOptions = {
+  gender: "male",
+  page: 1,
+  results: config.DEFAULT_AMOUNT,
+  seed: config.API_KEY,
+  nat: config.DEFAULT_NAT,    
+  inc:config.DEFAULT_USER_PROP,
+};
 /**
  *
  * @param {object} options
@@ -11,15 +19,7 @@ import config from "../configs";
  * @param {string} options.inc
  * @returns
  */
-export const getRandomUsers = (options = {}) => {
-  const defaultOption = {
-    gender: "male",
-    page: 1,
-    results: config.DEFAULT_AMOUNT,
-    seed: config.API_KEY,
-    nat: config.DEFAULT_NAT,    
-    inc:config.DEFAULT_USER_PROP,
-  };
+export const getRandomUsers = (options = {}, defaultOption = defaultOptions ) => {
   const finallyOptions = { ...defaultOption, ...options };
   const queryOptions = queryString.stringify(finallyOptions);
   return fetch(`${config.API_BASE_URL}?${queryOptions}`).then((response) =>
