@@ -6,26 +6,39 @@ class CounterPage extends Component {
     super(props);
     this.state = {
       step: 1,
+      valueInput:10
     };
   }
-  handlerRange = ({ target: { value } }) => {
-    this.setState({ step: Number(value) });
+  handlerInput = ({ target: { value, name } }) => {
+    this.setState({ [name]: Number(value) });
   };
+
   render() {
-    const { step } = this.state;
+    const { step, valueInput } = this.state;
     return (
       <section>
         <h1>Counter</h1>
-        <Counter step={step} />
+        <Counter step={step} valueInput={valueInput}/>
         <input
           type="range"
+          name="step"
           min={1}
           max={10}
           step={1}
           value={step}
-          onChange={this.handlerRange}
+          onChange={this.handlerInput}
+        />
+        <input
+          type="number"
+          name="valueInput"
+          min={0}
+          max={100}
+          step={10}
+          value={valueInput}
+          onChange={this.handlerInput}
         />
         <p>step: {step}</p>
+        <p>valueInput: {valueInput}</p>
       </section>
     );
   }
