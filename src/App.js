@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import WindowSize from "./components/WindowSize";
-import UsersLoader from "./components/UsersLoader";
 import StopWatch from "./components/StopWatch";
 import SignInForm from "./components/forms/SignInForm";
 import PageNotFound from "./pages/PageNotFound";
@@ -9,6 +8,7 @@ import Error from "./components/Error";
 import Spinner from "./components/Spinner";
 import Cabinet from "./pages/CabinetPage";
 import CounterPage from "./pages/CounterPage";
+import LoaderPage from './pages/LoaderPage';
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           <nav>
             <ul>
               <li>
-                <Link to="/">users loader</Link>
+                <Link to="/">loader</Link>
               </li>
               <li>
                 <Link to="/stopwatch">stopwatch</Link>
@@ -40,7 +40,7 @@ const App = () => {
           </nav>
         </header>
         <Routes>
-          <Route path="/" element={<UsersLoader />} />
+          <Route path="/" element={<LoaderPage />} />
           <Route path="/stopwatch" element={<StopWatch />} />
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/resize" element={<WindowSize />} />
