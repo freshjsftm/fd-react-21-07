@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Link, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import WindowSize from "./components/WindowSize";
 import UsersLoader from "./components/UsersLoader";
 import StopWatch from "./components/StopWatch";
@@ -7,6 +7,8 @@ import SignInForm from "./components/forms/SignInForm";
 import PageNotFound from "./pages/PageNotFound";
 import Error from "./components/Error";
 import Spinner from "./components/Spinner";
+import Cabinet from "./pages/CabinetPage";
+import CounterPage from "./pages/CounterPage";
 
 const App = () => {
   return (
@@ -30,14 +32,9 @@ const App = () => {
               </li>
               <li>
                 <Link to="/cabinet/">cabinet</Link>
-                <ul>
-                  <li>
-                    <Link to="/cabinet/error">error</Link>
-                  </li>
-                  <li>
-                    <Link to="/cabinet/spinner">spinner</Link>
-                  </li>
-                </ul>
+              </li>
+              <li>
+                <Link to="/counter">counter</Link>
               </li>
             </ul>
           </nav>
@@ -47,31 +44,15 @@ const App = () => {
           <Route path="/stopwatch" element={<StopWatch />} />
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/resize" element={<WindowSize />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/counter" element={<CounterPage />} />
           <Route path="/cabinet/" element={<Cabinet />}>
             <Route path="error" element={<Error />} />
             <Route path="spinner" element={<Spinner />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <footer>@2022</footer>
       </BrowserRouter>
-    </>
-  );
-};
-
-const Cabinet = () => {
-  return (
-    <>
-      <h1>Cabinet</h1>
-      <ul>
-        <li>
-          <Link to="/cabinet/error">error</Link>
-        </li>
-        <li>
-          <Link to="/cabinet/spinner">spinner</Link>
-        </li>
-      </ul>
-      <Outlet />
     </>
   );
 };
