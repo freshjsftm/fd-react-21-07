@@ -26,3 +26,10 @@ export const getRandomUsers = (options = {}, defaultOption = defaultOptions ) =>
     response.json()
   );
 };
+
+export const loadNames = () => {
+  return fetch("/users.json").then((res) => res.json());
+};
+export const loadPhones = () => {
+  return fetch("/phones.json").then((res) => res.json());
+};

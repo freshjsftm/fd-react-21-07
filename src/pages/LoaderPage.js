@@ -1,26 +1,38 @@
 import React from "react";
 import DataLoader from "../components/DataLoader";
+import { loadNames, loadPhones } from "../api";
+import Error from "../components/Error";
+import Spinner from "../components/Spinner";
 
 const LoaderPage = () => {
-  const loadNames = () => {
-    return fetch("/users.json").then((res) => res.json());
-  };
-  const loadPhones = () => {
-    return fetch("/phones.json").then((res) => res.json());
-  };
-  const renderNames = (state) => {
+  const renderNames = ({ data, error, isFetching }) => {
     return (
-      <ul>
-        {state.data.map(({ id, name }) => (
-          <li key={id}>{name}</li>
-        ))}
-      </ul>
+      <>
+        {error ? (
+          <Error />
+        ) : isFetching ? (
+          <Spinner />
+        ) : (
+          <ul>
+            {data.map(({ id, name }) => (
+              <li key={id}>{name}</li>
+            ))}
+          </ul>
+        )}
+      </>
     );
   };
-  const renderPhones = (state) => {
+
+  const renderPhones = ({ data, error, isFetching }) => {
+    if (error) {
+      return <Error />;
+    }
+    if (isFetching) {
+      return <Spinner />;
+    }
     return (
       <ul>
-        {state.data.map(({ id, name, price }) => (
+        {data.map(({ id, name, price }) => (
           <li key={id}>
             {name} price:{price}
           </li>
