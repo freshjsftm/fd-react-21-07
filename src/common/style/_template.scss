@@ -3,3 +3,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+%light{
+  background-color: #eee;
+  color:#222;
+}
+
+%dark{
+  background-color: #222;
+  color:#eee;
+}

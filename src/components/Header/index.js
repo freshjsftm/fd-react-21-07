@@ -1,19 +1,44 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../contexts";
+import cx from "classnames";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { UserContext, ThemeContext } from "../../contexts";
+import styles from "./Header.module.scss";
+import CONSTANTS from "../../constants";
+const { THEMES } = CONSTANTS;
 
 class Header extends Component {
   render() {
-    console.log(this);
     return (
-      <header>
-        <Link to="/">Logo</Link>
-        <p>Hi, {this.context.fname}!</p>
-      </header>
+      <ThemeContext.Consumer>
+        {([theme, setTheme]) => {
+          const stylesContainer = cx(styles.container, {
+            [styles.light]: theme === THEMES.LIGHT,
+            [styles.dark]: theme === THEMES.DARK,
+          });
+          const hendlerSwitch = () => {
+            const newTheme =
+              theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+            setTheme(newTheme);
+          };
+          return (
+            <header className={stylesContainer}>
+              <Link to="/">Logo</Link>
+              <div>
+                <span onClick={hendlerSwitch}>
+                  {theme === THEMES.LIGHT ? <DarkModeIcon /> : <WbSunnyIcon />}
+                </span>
+                <UserContext.Consumer>
+                  {({ fname }) => <p>Hi, {fname}!</p>}
+                </UserContext.Consumer>
+              </div>
+            </header>
+          );
+        }}
+      </ThemeContext.Consumer>
     );
   }
 }
-
-Header.contextType = UserContext;
 
 export default Header;

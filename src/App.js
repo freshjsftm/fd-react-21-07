@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Tree from "./components/Tree";
-import { UserContext } from "./contexts";
+import { UserContext, ThemeContext } from "./contexts";
+import CONSTANTS from "./constants";
+const { THEMES } = CONSTANTS;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      theme: THEMES.LIGHT,
       user: {
         id: 1,
         fname: "Elon",
@@ -18,15 +21,18 @@ class App extends Component {
     };
   }
 
+  setTheme = (theme) => this.setState({theme})
+
   render() {
-    console.log(UserContext);
-    const { user } = this.state;
+    const { user, theme } = this.state;
     return (
       <BrowserRouter>
-        <UserContext.Provider value={user}>
-          <Header />
-          <Tree />
-        </UserContext.Provider>
+        <ThemeContext.Provider value={[theme, this.setTheme]}>
+          <UserContext.Provider value={user}>
+            <Header />
+            <Tree />
+          </UserContext.Provider>
+        </ThemeContext.Provider>
       </BrowserRouter>
     );
   }
