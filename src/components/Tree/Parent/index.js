@@ -1,11 +1,12 @@
 import React from 'react';
 import SubParent from '../SubParent';
 
-const Parent = () => {
+const Parent = (props) => {
+  
   return (
     <div>
       <h2>Parent</h2>
-      <SubParent />
+      <SubParent/>
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { BrowserRouter } from "react-router-dom";
+import Header from "./components/Header";
 import Tree from "./components/Tree";
+import { UserContext } from "./contexts";
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +19,16 @@ class App extends Component {
   }
 
   render() {
-    return <>
-    <Tree />
-    </>;
+    console.log(UserContext);
+    const { user } = this.state;
+    return (
+      <BrowserRouter>
+        <UserContext.Provider value={user}>
+          <Header />
+          <Tree />
+        </UserContext.Provider>
+      </BrowserRouter>
+    );
   }
 }
 

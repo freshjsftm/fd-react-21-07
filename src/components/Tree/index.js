@@ -1,11 +1,12 @@
 import React from 'react';
 import Parent from './Parent';
 
-const Tree = () => {
+const Tree = (props) => {
+
   return (
     <div>
       <h2>Tree</h2>
-      <Parent />
+      <Parent/>
     </div>
   );
 }
