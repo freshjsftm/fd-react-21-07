@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import cx from "classnames";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import {WbSunny, DarkMode} from '@mui/icons-material';
 import { UserContext, ThemeContext } from "../../contexts";
 import styles from "./Header.module.scss";
 import CONSTANTS from "../../constants";
@@ -13,13 +12,13 @@ class Header extends Component {
     return (
       <ThemeContext.Consumer>
         {([theme, setTheme]) => {
+          const isLightTheme = theme === THEMES.LIGHT;
           const stylesContainer = cx(styles.container, {
-            [styles.light]: theme === THEMES.LIGHT,
+            [styles.light]: isLightTheme,
             [styles.dark]: theme === THEMES.DARK,
           });
           const hendlerSwitch = () => {
-            const newTheme =
-              theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+            const newTheme = isLightTheme ? THEMES.DARK : THEMES.LIGHT;
             setTheme(newTheme);
           };
           return (
@@ -27,7 +26,7 @@ class Header extends Component {
               <Link to="/">Logo</Link>
               <div>
                 <span onClick={hendlerSwitch}>
-                  {theme === THEMES.LIGHT ? <DarkModeIcon /> : <WbSunnyIcon />}
+                  {isLightTheme ? <DarkMode /> : <WbSunny />}
                 </span>
                 <UserContext.Consumer>
                   {({ fname }) => <p>Hi, {fname}!</p>}
