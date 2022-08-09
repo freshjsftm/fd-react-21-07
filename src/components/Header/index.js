@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import cx from "classnames";
 import { WbSunny, DarkMode } from "@mui/icons-material";
-import { UserContext } from "../../contexts";
 import styles from "./Header.module.scss";
 import CONSTANTS from "../../constants";
 import { WithTheme, WithUser } from "../HOCs";
