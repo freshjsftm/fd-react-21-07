@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
 import Parent from "./Parent";
-import { ThemeContext } from "../../contexts";
 import CONSTANTS from "../../constants";
 import styles from "./Tree.module.scss";
+import { WithTheme } from '../HOCs';
 const { THEMES } = CONSTANTS;
 
 const Tree = (props) => {
@@ -20,8 +20,4 @@ const Tree = (props) => {
   );
 };
 
-const TreeWithThemeContext = () => (
-  <ThemeContext.Consumer>{([theme]) => <Tree theme={theme}/>}</ThemeContext.Consumer>
-);
-
-export default TreeWithThemeContext;
+export default WithTheme(Tree);
