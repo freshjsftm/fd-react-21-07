@@ -1,8 +1,9 @@
 import React from "react";
-import { UserContext } from "../../../contexts";
+import { WithUser } from "../../HOCs";
 
 const UserProfile = (props) => {
-  const renderProps = ({ fname, lname, avatar }) => (
+  const { user:{fname, lname, avatar} } = props;
+  return (
     <div>
       USER:
       <h2>
@@ -11,7 +12,6 @@ const UserProfile = (props) => {
       <img src={avatar} alt={lname} />
     </div>
   );
-  return <UserContext.Consumer>{renderProps}</UserContext.Consumer>;
 };
 
-export default UserProfile;
+export default WithUser(UserProfile);

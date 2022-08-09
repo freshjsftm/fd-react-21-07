@@ -5,12 +5,12 @@ import { WbSunny, DarkMode } from "@mui/icons-material";
 import { UserContext } from "../../contexts";
 import styles from "./Header.module.scss";
 import CONSTANTS from "../../constants";
-import { WithTheme } from "../HOCs";
+import { WithTheme, WithUser } from "../HOCs";
 const { THEMES } = CONSTANTS;
 
 class Header extends Component {
   render() {
-    const { theme, setTheme } = this.props;
+    const { theme, setTheme, user:{fname} } = this.props;
     const isLightTheme = theme === THEMES.LIGHT;
     const stylesContainer = cx(styles.container, {
       [styles.light]: isLightTheme,
@@ -27,13 +27,11 @@ class Header extends Component {
           <span onClick={hendlerSwitch}>
             {isLightTheme ? <DarkMode /> : <WbSunny />}
           </span>
-          <UserContext.Consumer>
-            {({ fname }) => <p>Hi, {fname}!</p>}
-          </UserContext.Consumer>
+          <p>Hi, {fname}!</p>
         </div>
       </header>
     );
   }
 }
 
-export default WithTheme(Header);
+export default WithUser(WithTheme(Header));
