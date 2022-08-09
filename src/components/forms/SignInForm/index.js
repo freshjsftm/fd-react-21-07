@@ -49,11 +49,5 @@ class SignInForm extends Component {
 }
 export default SignInForm;
 
-// function cx(stylesObject) {
-//   return Object.entries(stylesObject)
-//     .filter(([className, condition]) => condition)
-//     .map(([className, condition]) => className)
-//     .join(" ");
-// }
 
 
