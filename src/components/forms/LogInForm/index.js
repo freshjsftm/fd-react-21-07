@@ -1,7 +1,8 @@
 import React from "react";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { SCHEMA_LOGIN } from "../../../utils/validateSchemas";
 import styles from "./LogInForm.module.scss";
+import InputInLabel from "../InputInLabel";
 const initialValues = {
   login: "",
   password: "",
@@ -17,17 +18,10 @@ const LogInForm = (props) => {
       validationSchema={SCHEMA_LOGIN}
     >
       {(formikProps) => {
-        console.log(formikProps)
         return (
           <Form className={styles.container}>
-            <Field name="login" />
-            {formikProps.errors.login && formikProps.touched.login && (
-              <span>{formikProps.errors.login}</span>
-            )}
-            <Field name="password" />
-            {formikProps.errors.password && formikProps.touched.password && (
-              <span>{formikProps.errors.password}</span>
-            )}
+            <InputInLabel name="login" type="text" placeholder="login" />
+            <InputInLabel name="password" type="password"/>
             <input type="submit" />
             <input type="reset" />
           </Form>
