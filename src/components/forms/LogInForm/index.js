@@ -3,18 +3,16 @@ import { Form, Formik } from "formik";
 import { SCHEMA_LOGIN } from "../../../utils/validateSchemas";
 import styles from "./LogInForm.module.scss";
 import InputInLabel from "../InputInLabel";
+import { PropTypes } from 'prop-types';
 const initialValues = {
   login: "",
   password: "",
 };
 const LogInForm = (props) => {
-  const onSubmit = (values, formikBag) => {
-    formikBag.resetForm();
-  };
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={props.onSubmit}
       validationSchema={SCHEMA_LOGIN}
     >
       {(formikProps) => {
@@ -30,4 +28,8 @@ const LogInForm = (props) => {
     </Formik>
   );
 };
+
+LogInForm.propTypes = {
+  onSubmit: PropTypes.func,
+}
 export default LogInForm;
