@@ -4,7 +4,7 @@ export const SCHEMA_NAME = Yup.string('Must be string').matches(/^[A-Z][a-z]{1,1
 
 export const SCHEMA_EMAIL = Yup.string('Must be string').email('Invalid email').required('Must be required');
 
-export const SCHEMA_PASSWORD = Yup.string('Must be string').matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/).required('Must be required');
+export const SCHEMA_PASSWORD = Yup.string('Must be string').matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,32}$/, 'Invalid password').required('Must be required');
 
 export const SCHEMA_SIGN_UP = Yup.object({
   fname: SCHEMA_NAME,
@@ -23,4 +23,9 @@ export const SCHEMA_SIGN_IN =  Yup.object({
 export const SCHEMA_CONTACTS =  Yup.object({
   fname: SCHEMA_NAME,
   email:SCHEMA_EMAIL
+})
+
+export const SCHEMA_LOGIN = Yup.object({
+  login: Yup.string('Must be string').matches(/^\w{4,16}$/,'Invalid login').required('Must be required'),
+  password: SCHEMA_PASSWORD
 })
