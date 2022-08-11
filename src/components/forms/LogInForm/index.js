@@ -7,6 +7,7 @@ import { PropTypes } from 'prop-types';
 const initialValues = {
   login: "",
   password: "",
+  passwordconfirm:""
 };
 const LogInForm = (props) => {
   return (
@@ -20,6 +21,7 @@ const LogInForm = (props) => {
           <Form className={styles.container}>
             <InputInLabel name="login" type="text" placeholder="login" />
             <InputInLabel name="password" type="password"/>
+            <InputInLabel name="passwordconfirm" type="password"/>
             <input type="submit" />
             <input type="reset" />
           </Form>
