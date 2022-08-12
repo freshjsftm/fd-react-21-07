@@ -1,10 +1,8 @@
 import React from "react";
 // import logo from "../../logo.png";
 import { Link, useLocation } from "react-router-dom";
-
 const HeaderTask = () => {
   const {pathname} = useLocation();
-  console.log(pathname)
   return (
     <div>
       {/* <Link to="/"><img src={logo} alt="logo"/></Link> */}
@@ -13,5 +11,4 @@ const HeaderTask = () => {
     </div>
   );
 };
-
 export default HeaderTask;

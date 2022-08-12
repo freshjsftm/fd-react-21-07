@@ -28,5 +28,6 @@ export const SCHEMA_CONTACTS =  Yup.object({
 export const SCHEMA_LOGIN = Yup.object({
   login: Yup.string('Must be string').matches(/^\w{4,16}$/,'Invalid login').required('Must be required'),
   password: SCHEMA_PASSWORD,
-  passwordconfirm: Yup.string().oneOf([Yup.ref('password')], 'Password not equal')
+  passwordconfirm: Yup.string().oneOf([Yup.ref('password')], 'Password not equal'),
+  role: Yup.string().oneOf(['creator', 'buyer'], 'Must be creator or buyer').required('Must be required'),
 })
