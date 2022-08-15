@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const LearnHooks = () => {
-  const [coord, setCoord] = useState({ x: 0, y: 0 , z: 0});
   const [count, setCount] = useState(0);
-  const handlerMove = (event) => {
-    setCoord({
-      ...coord,
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-  const handlerClick = () => {
-    setCount((prevCount)=>prevCount+1);
-  };
+  const [step, setStep] = useState(1);
+  const handlerInput = ({target:{value}})=> {
+    setStep(Number(value))
+  }
+
+  useEffect(()=>{
+    const handlerClick = () => {
+      setCount((prevCount)=>prevCount+step);
+    };
+    window.addEventListener('click', handlerClick);
+    return ()=>{
+      window.removeEventListener('click', handlerClick);
+    }
+  },[step])
+  
   return (
-    <div
-      style={{ height: "80vh", backgroundColor: "#eee" }}
-      onMouseMove={handlerMove}
-      onClick={handlerClick}
-    >
-      <p>X: {coord.x}</p>
-      <p>Y: {coord.y}</p>
-      <p>Z: {coord.z}</p>
+    <div style={{ height: "80vh", backgroundColor: "#eee" }} >
       <p>Count: {count}</p>
+      <input type="number" value={step} onChange={handlerInput}/>
     </div>
   );
 };
