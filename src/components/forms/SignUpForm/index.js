@@ -1,13 +1,5 @@
 import React, {useReducer} from 'react';
-
-const reducer = (state, action)=>{
-  const {name,value} = action;
-  const newState = {
-    ...state,
-    [name]:value
-  }
-  return newState;
-}
+import reducer from './reducer';
 
 const SignUpForm = () => {
   const [state, dispatch] = useReducer(
