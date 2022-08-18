@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import { UserContext, ThemeContext } from "./contexts";
 import UserCard from "./components/UserCard";
 import CONSTANTS from "./constants";
+import { useClicker } from "./hooks";
 const {THEMES} = CONSTANTS;
 const App = () => {
   const [user, setUser] = useState({
@@ -15,9 +16,11 @@ const App = () => {
     isSelected: false,
   });
   const themeArrState = useState(THEMES.LIGHT);
+  const count = useClicker();
   return (
     <ThemeContext.Provider value={themeArrState}>
         <UserContext.Provider value={[user, setUser]}>
+          <p> Count: {count}</p>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
