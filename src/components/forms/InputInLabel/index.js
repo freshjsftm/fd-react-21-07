@@ -8,7 +8,6 @@ const InputInLabel = (props) => {
   return (
     <label>
       <span>Enter your {name}</span>
-      {/* <Field name={name}  {...restProps}/> */}
       <Field name={name}>
         {({ field, form, meta }) => {
           const inputClasses = cx(styles.input,  {
