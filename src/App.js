@@ -1,12 +1,11 @@
-import React, { useState} from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import FuncStopWatch from "./components/FuncStopWatch";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { UserContext, ThemeContext } from "./contexts";
-import UserCard from "./components/UserCard";
 import CONSTANTS from "./constants";
 import { useClicker } from "./hooks";
-const {THEMES} = CONSTANTS;
+import SignUpForm from "./components/forms/SignUpForm";
+const { THEMES } = CONSTANTS;
 const App = () => {
   const [user, setUser] = useState({
     id: 1,
@@ -19,16 +18,25 @@ const App = () => {
   const count = useClicker();
   return (
     <ThemeContext.Provider value={themeArrState}>
-        <UserContext.Provider value={[user, setUser]}>
-          <p> Count: {count}</p>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/usercard" element={<UserCard />} />
-              <Route path="/func" element={<FuncStopWatch />} />
-            </Routes>
-          </BrowserRouter>
-        </UserContext.Provider>
+      <UserContext.Provider value={[user, setUser]}>
+        <p> Count: {count}</p>
+        <BrowserRouter>
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup">SignUp</NavLink>
+              </li>
+            </ul>
+          </nav>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignUpForm />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </ThemeContext.Provider>
   );
 };

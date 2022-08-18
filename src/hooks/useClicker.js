@@ -3,7 +3,6 @@ import {useState, useEffect} from "react";
 const useClicker = (initialValue=0)=>{
   const [count, setCount] = useState(initialValue);
   useEffect(()=>{
-    console.log(1)
     const handlerClick = ()=>{
       setCount(count=>count+1)
     }
