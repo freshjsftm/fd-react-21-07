@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useId } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomePage from "./pages/HomePage";
@@ -25,12 +25,12 @@ const App = () => {
 
   const menuOpen = ()=> dispatch({type:MENU_ACTIONS.MENU_OPEN})
   const menuClose = ()=> dispatch({type:MENU_ACTIONS.MENU_CLOSE})
-
+  const idOpen = useId();
   return (
-    <MenuContext.Provider value={{state, menuClose, menuOpen}}>
+    <MenuContext.Provider value={{state, menuClose, menuOpen, idOpen}}>
       <ThemeContext.Provider value={themeArrState}>
         <UserContext.Provider value={[user, setUser]}>
-          {/* <MenuIcon onClick={menuOpen}/> */}
+          <MenuIcon onClick={menuOpen} id={idOpen}/>
           {/* <p> Count: {count}</p> */}
           <BrowserRouter>
             <NavMenu />
