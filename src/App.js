@@ -20,7 +20,7 @@ const App = () => {
     isSelected: false,
   });
   const themeArrState = useState(THEMES.LIGHT);
-  const count = useClicker();
+  //const count = useClicker();
   const [state, dispatch] = useReducer(reducer, { isMenuOpen: false });
 
   const menuOpen = ()=> dispatch({type:MENU_ACTIONS.MENU_OPEN})
@@ -30,8 +30,8 @@ const App = () => {
     <MenuContext.Provider value={{state, menuClose, menuOpen}}>
       <ThemeContext.Provider value={themeArrState}>
         <UserContext.Provider value={[user, setUser]}>
-          <MenuIcon onClick={menuOpen}/>
-          <p> Count: {count}</p>
+          {/* <MenuIcon onClick={menuOpen}/> */}
+          {/* <p> Count: {count}</p> */}
           <BrowserRouter>
             <NavMenu />
             <Routes>

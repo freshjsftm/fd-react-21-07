@@ -1,4 +1,4 @@
-$width: 300px;
+$width: 200px;
 .nav{
   width: $width;
   position: fixed;
@@ -6,6 +6,7 @@ $width: 300px;
   // left: 0;
   bottom: 0;
   top:0;
+  z-index:999;
   background-color: teal;
   color: white;
   transition: left 700ms;
@@ -29,6 +30,18 @@ $width: 300px;
       border-bottom: 2px solid white;
     }
   }
+}
+.open .open-btn{
+  opacity: 0;  
+  transition: opacity 0.7s 1s;
+}
+.open-btn{
+  position: fixed;
+  left:100px;
+  z-index: 0;
+  color: #000;
+  opacity: 1;
+  transition: opacity 0.7s 1s;
 }
 
 .open{
