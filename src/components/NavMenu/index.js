@@ -22,7 +22,7 @@ const NavMenu = () => {
     const handlerClick = ({target}) => {
       console.log(target)
       //if (isMenuOpen && !navRef.current.contains(target)) {
-      if (isMenuOpen && !document.getElementById(idNav).contains(target) && target!==document.getElementById(idOpen) && !document.getElementById(idOpen).contains(target) ) {
+      if (isMenuOpen && !document.getElementById(idNav).contains(target) && !document.getElementById(idOpen).contains(target) ) {
         menuClose();
       }
     };
