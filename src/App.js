@@ -20,18 +20,26 @@ const App = () => {
     isSelected: false,
   });
   const themeArrState = useState(THEMES.LIGHT);
-  //const count = useClicker();
+  const count = useClicker();
   const [state, dispatch] = useReducer(reducer, { isMenuOpen: false });
 
   const menuOpen = ()=> dispatch({type:MENU_ACTIONS.MENU_OPEN})
   const menuClose = ()=> dispatch({type:MENU_ACTIONS.MENU_CLOSE})
   const idOpen = useId();
+
+  const tabHandlerOpen = ({key})=>{
+    if(key==='Enter'){
+      menuOpen();
+    }
+  }
+
   return (
     <MenuContext.Provider value={{state, menuClose, menuOpen, idOpen}}>
       <ThemeContext.Provider value={themeArrState}>
         <UserContext.Provider value={[user, setUser]}>
-          <MenuIcon onClick={menuOpen} id={idOpen}/>
-          {/* <p> Count: {count}</p> */}
+          <MenuIcon onClick={menuOpen} id={idOpen} tabIndex='0' 
+          onKeyDown={tabHandlerOpen}/>
+          <p> Count: {count}</p>
           <BrowserRouter>
             <NavMenu />
             <Routes>

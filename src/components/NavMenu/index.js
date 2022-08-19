@@ -32,10 +32,17 @@ const NavMenu = () => {
     };
   }, [isMenuOpen]);
 
+  const tabHandlerClose = ({key})=>{
+    if(key==='Enter'){
+      menuClose();
+    }
+  }
+
   return (
     <nav className={navClass} ref={navRef} id={idNav}>
       {/* <MenuIcon  className={styles["open-btn"]} onClick={menuOpen}/> */}
-      <CloseIcon className={styles["close-btn"]} onClick={menuClose} />
+      <CloseIcon className={styles["close-btn"]} onClick={menuClose}  tabIndex='1'
+      onKeyDown={tabHandlerClose}/>
       <ul className={styles.list}>
         <li>
           <NavLink to="/">Home</NavLink>
