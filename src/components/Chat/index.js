@@ -1,45 +1,30 @@
 import React, { useReducer, useEffect } from "react";
-
-const reducer = (state, action) => {
-  const {
-    type,
-    data: { users, messages },
-  } = action;
-  switch(type){
-    case "DATA_RESPONSE_SUCCESS":{
-      //map userslink
-      const usersLinkMap = new Map();
-      users.forEach((user)=>usersLinkMap.set(user.id, user));
-      const messagesWithUser = messages.map((message)=>{
-        const newMessageWithUser = {
-          ...message,
-          author:usersLinkMap.get(message.userId)
-        }
-        return newMessageWithUser;
-      })
-      const newState={
-        ...state,
-        users,
-        messages: messagesWithUser
-      };
-      return newState;
-    }
-    default: return state;
-  }
-};
+import { loadChat } from "../../api";
+import Error from "../Error";
+import reducer from "./reducer";
+import CONSTANTS from "../../constants";
+const { CHAT_ACTIONS } = CONSTANTS;
 
 const Chat = () => {
-  const [state, dispatch] = useReducer(reducer, { users: [], messages: [] });
+  const [state, dispatch] = useReducer(reducer, {
+    users: [],
+    messages: [],
+    error: null,
+  });
 
   useEffect(() => {
-    fetch("/chat.json")
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: "DATA_RESPONSE_SUCCESS", data }));
-    //.catch((error) => dispatch({ type: "DATA_RESPONSE_ERROR", error }));
+    loadChat()
+      .then((data) =>
+        dispatch({ type: CHAT_ACTIONS.DATA_RESPONSE_SUCCESS, data })
+      )
+      .catch((error) =>
+        dispatch({ type: CHAT_ACTIONS.DATA_RESPONSE_ERROR, error })
+      );
   }, []);
 
   return (
     <div>
+      {state.error && <Error />}
       <h1>Chat:</h1>
       {state.messages.map((message) => (
         <article key={message.id}>

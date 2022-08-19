@@ -33,3 +33,9 @@ export const loadNames = () => {
 export const loadPhones = () => {
   return fetch("/phones.json").then((res) => res.json());
 };
+
+
+export const loadChat = () =>{
+  return fetch("/chat.json")
+      .then((response) => response.json())
+}
