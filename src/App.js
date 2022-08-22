@@ -9,6 +9,7 @@ import Chat from "./components/Chat";
 import NavMenu from "./components/NavMenu";
 import reducer from "./reducerApp";
 import CONSTANTS from "./constants";
+import Todo from './components/Todo/index';
 const { THEMES, MENU_ACTIONS } = CONSTANTS;
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/todo" element={<Todo />} />
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>

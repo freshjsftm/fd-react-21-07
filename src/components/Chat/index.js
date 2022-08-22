@@ -10,9 +10,11 @@ const Chat = () => {
     users: [],
     messages: [],
     error: null,
+
   });
 
   useEffect(() => {
+    
     loadChat()
       .then((data) =>
         dispatch({ type: CHAT_ACTIONS.DATA_RESPONSE_SUCCESS, data })
